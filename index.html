@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#17181b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Project 50">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Project 打分挑战</title>
+</head>
+<body>
+  <header class="topbar">
+    <div><div class="eyebrow" id="projectEyebrow">PROJECT 50</div><h1 id="pageTitle">今日打卡</h1></div>
+    <div class="day-badge" id="dayBadge">Day 1 / 50</div>
+  </header>
+
+  <main>
+    <section class="view active" id="view-today">
+      <div class="date-nav card">
+        <button id="prevDay" aria-label="前一天">‹</button>
+        <label><span>打卡日期</span><input id="entryDate" type="date"></label>
+        <button id="nextDay" aria-label="后一天">›</button>
+      </div>
+
+      <div class="score-card card">
+        <div><span>当日总分</span><strong id="todayScore">0</strong><small>/ 100</small></div>
+        <div class="score-ring" id="scoreRing"><span id="ringScore">0</span></div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="card stat"><span>已记录天平均分</span><strong id="recordedAverage">0.0</strong></div>
+        <div class="card stat"><span id="planAverageLabel">50 天计划平均分</span><strong id="planAverage">0.0</strong></div>
+      </div>
+
+      <article class="card">
+        <div class="section-head"><h2>必须完成项</h2><span class="pill" id="requiredCount">0/0</span></div>
+        <div id="requiredChecklist" class="checklist"></div>
+      </article>
+
+      <article class="card bonus-card">
+        <div class="section-head"><div><h2>加分项</h2><p>完成多个时，只计分数最高的一项</p></div><span class="pill" id="bonusCount">0/0</span></div>
+        <div id="bonusChecklist" class="checklist"></div>
+      </article>
+
+      <article class="card">
+        <div class="section-head"><h2>每日记录</h2><span class="muted">自动保存</span></div>
+        <div class="form-grid">
+          <label>睡眠时长<input id="sleep" type="number" min="0" max="24" step="0.5" inputmode="decimal" placeholder="小时"></label>
+          <label>心情<select id="mood"><option value="">选择</option><option>很好</option><option>不错</option><option>一般</option><option>疲惫</option><option>低落</option></select></label>
+        </div>
+        <label>今日总结<textarea id="note" rows="4" placeholder="记录完成情况、感受和改进点……"></textarea></label>
+      </article>
+    </section>
+
+    <section class="view" id="view-calendar">
+      <article class="card">
+        <div class="section-head"><div><h2 id="calendarTitle">50 天打卡记录</h2><p>点击日期查看或补记</p></div></div>
+        <div id="calendarGrid" class="calendar-grid"></div>
+      </article>
+    </section>
+
+    <section class="view" id="view-rules">
+      <article class="card sort-card">
+        <div class="section-head"><div><h2>规则排序</h2><p>自定义排序可使用上移、下移按钮；分数排序会自动按高到低显示。</p></div></div>
+        <label>排序方式<select id="sortMode"><option value="custom">自定义排序</option><option value="score">按分数由高到低</option></select></label>
+      </article>
+      <article class="card">
+        <div class="section-head stacked"><div><h2>必须完成项</h2><p>所有必须项分数相加。</p></div><button class="primary" id="addRequired">添加必须项</button></div>
+        <div id="requiredEditor"></div>
+      </article>
+      <article class="card bonus-card">
+        <div class="section-head stacked"><div><h2>加分项</h2><p>可设置多个，但每天只取已完成项中的最高分。</p></div><button class="primary" id="addBonus">添加加分项</button></div>
+        <div id="bonusEditor"></div>
+      </article>
+      <div class="score-check card" id="scoreCheck"></div>
+      <button class="secondary full" id="restoreDefaults">一键恢复默认挑战规则</button>
+    </section>
+
+    <section class="view" id="view-settings">
+      <article class="card">
+        <h2 id="settingsTitle">Project 50 设置</h2>
+        <label>挑战天数<input id="challengeDays" type="number" min="1" max="3650" step="1" inputmode="numeric" placeholder="例如 30、50、100"></label>
+        <label>开始日期<input id="startDate" type="date"></label>
+        <label>挑战宣言<textarea id="manifesto" rows="3"></textarea></label>
+        <button class="primary full" id="saveSettings">保存设置</button>
+      </article>
+      <article class="card">
+        <h2>数据</h2>
+        <div class="button-stack">
+          <button class="secondary full" id="exportData">导出 JSON 备份</button>
+          <button class="secondary full" id="importData">导入 JSON 备份</button>
+          <input id="importFile" type="file" accept="application/json" hidden>
+          <button class="danger full" id="clearData">清空全部记录</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="active" data-view="today"><span>✓</span>今日</button>
+    <button data-view="calendar"><span>▦</span>日历</button>
+    <button data-view="rules"><span>☷</span>规则</button>
+    <button data-view="settings"><span>⚙</span>设置</button>
+  </nav>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
