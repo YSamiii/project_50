@@ -1,12 +1,14 @@
-Project XX 手机端 PWA（打分制 / 打卡制）
+Project XX Mobile PWA — Language & Appearance Update
 
-新增功能：
-1. 在“规则”页面顶部选择挑战模式：
-   - 打分制：规则可设置分数；必须项累加；加分项只取最高分；每日最高 100 分。
-   - 打卡制：只勾选完成状态，不显示或计算分数；所有勾选项均计入完成率。
-2. 两种模式均支持自定义天数、规则编辑、自定义排序、日历补记、数据导入导出。
-3. 切换模式不会删除原有规则分数；以后切回打分制仍会保留。
-4. 打卡制下自动显示当日完成率、已记录天平均完成率及整个计划完成率。
+New in this version:
+- Language: Follow system / 中文 / English
+- Appearance: Follow system / Light / Dark
+- Follow-system appearance reacts to the phone's current light/dark setting
+- Existing scoring/check-in modes, custom challenge length, rule ordering, calendar and JSON backup remain available
 
-安装：将整个文件夹上传到 GitHub Pages 等 HTTPS 网站，用手机浏览器打开后添加到主屏幕。
-更新旧版时，若页面未变化，请删除旧主屏幕图标并清除网站缓存后重新添加。
+Install:
+1. Upload the entire folder to GitHub Pages or another HTTPS host.
+2. Open the site in Safari (iPhone) or Chrome (Android).
+3. Add to Home Screen / Install App.
+
+If an older version is still shown, remove the old Home Screen app and clear the site's cached data before reinstalling.
